@@ -10,41 +10,41 @@ export default function DetectorPage() {
   const [activeTab, setActiveTab] = useState<"news" | "deepfake">("news");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Header */}
-      <header className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 sticky top-0 z-40">
+      <header className="bg-slate-900/80 backdrop-blur-md border-b border-slate-700 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
+          <Link href="/" className="flex items-center gap-2 text-slate-300 hover:text-blue-400 transition transform hover:scale-105">
             <FiArrowLeft />
-            Back
+            Back Home
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-white animate-neon-glow">
             Detection Tools
           </h1>
-          <div className="w-10"></div>
+          <div className="w-24"></div>
         </div>
       </header>
 
       {/* Navigation Tabs */}
-      <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800">
+      <div className="bg-slate-900/80 backdrop-blur-md border-b border-slate-700">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex gap-1 py-4">
             <button
               onClick={() => setActiveTab("news")}
-              className={`px-6 py-3 font-bold rounded-lg transition ${
+              className={`px-6 py-3 font-bold rounded-lg transition transform hover:scale-105 ${
                 activeTab === "news"
-                  ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border-b-2 border-blue-600"
-                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                  ? "bg-blue-500/20 text-blue-300 border-b-2 border-blue-400 shadow-lg shadow-blue-500/20"
+                  : "text-slate-400 hover:text-slate-200"
               }`}
             >
               🔍 Fake News Detector
             </button>
             <button
               onClick={() => setActiveTab("deepfake")}
-              className={`px-6 py-3 font-bold rounded-lg transition ${
+              className={`px-6 py-3 font-bold rounded-lg transition transform hover:scale-105 ${
                 activeTab === "deepfake"
-                  ? "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 border-b-2 border-purple-600"
-                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                  ? "bg-purple-500/20 text-purple-300 border-b-2 border-purple-400 shadow-lg shadow-purple-500/20"
+                  : "text-slate-400 hover:text-slate-200"
               }`}
             >
               🎭 Deepfake Detector

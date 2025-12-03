@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { FiUpload, FiLoader } from "react-icons/fi";
+import { FiUpload, FiLoader, FiX, FiCheckCircle, FiAlertTriangle, FiChevronDown } from "react-icons/fi";
 import Image from "next/image";
 
 interface DeepfakeAnalysis {
@@ -31,6 +31,7 @@ export default function DeepfakeDetector() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<DeepfakeAnalysis | null>(null);
   const [error, setError] = useState("");
+  const [expandedSection, setExpandedSection] = useState<string | null>("indicators");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,26 +90,29 @@ export default function DeepfakeDetector() {
   };
 
   const getAuthenticityColor = (score: number) => {
-    if (score >= 75) return "text-green-600";
-    if (score >= 50) return "text-yellow-600";
-    return "text-red-600";
+    if (score >= 75) return "text-green-500";
+    if (score >= 50) return "text-yellow-500";
+    return "text-red-500";
   };
 
   const getClassificationColor = (classification: string) => {
-    if (classification === "AUTHENTIC") return "bg-green-100 text-green-800";
-    if (classification === "LIKELY_FAKE") return "bg-red-100 text-red-800";
+    if (classification === "AUTHENTIC") return "bg-green-500/20 text-green-300 border-green-500/30";
+    if (classification === "LIKELY_FAKE") return "bg-red-500/20 text-red-300 border-red-500/30";
     if (classification === "AI_GENERATED")
-      return "bg-orange-100 text-orange-800";
-    return "bg-yellow-100 text-yellow-800";
+      return "bg-orange-500/20 text-orange-300 border-orange-500/30";
+    return "bg-yellow-500/20 text-yellow-300 border-yellow-500/30";
   };
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-8">
-      <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 border border-gray-200 dark:border-gray-800">
-        <h2 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">
-          🎭 Deepfake Detector
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-6">
+      <div className="bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-900 dark:to-slate-950 rounded-2xl shadow-2xl p-8 border border-slate-700/50 backdrop-blur">
+        <div className="flex items-center gap-3 mb-2">
+          <FiUpload className="text-purple-400 text-3xl" />
+          <h2 className="text-3xl font-bold text-white">
+            🎭 Deepfake Detector
+          </h2>
+        </div>
+        <p className="text-slate-400 mb-8">
           Upload an image to detect deepfakes, AI-generated content, and
           manipulations
         </p>
@@ -118,7 +122,7 @@ export default function DeepfakeDetector() {
           {/* File Upload Area */}
           <div
             onClick={() => fileInputRef.current?.click()}
-            className="border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/10 transition"
+            className="border-2 border-dashed border-slate-600 rounded-lg p-8 text-center cursor-pointer hover:border-purple-400 hover:bg-purple-500/5 transition"
           >
             <input
               ref={fileInputRef}
@@ -128,30 +132,41 @@ export default function DeepfakeDetector() {
               className="hidden"
               disabled={loading}
             />
-            <FiUpload className="w-12 h-12 mx-auto mb-3 text-gray-500" />
-            <p className="text-gray-700 dark:text-gray-300 font-medium">
+            <FiUpload className="w-12 h-12 mx-auto mb-3 text-slate-400" />
+            <p className="text-slate-300 font-medium">
               Click to upload or drag and drop
             </p>
-            <p className="text-gray-500 dark:text-gray-400 text-sm">
+            <p className="text-slate-500 text-sm">
               PNG, JPG, GIF up to 10MB
             </p>
           </div>
 
           {/* Image Preview */}
           {selectedImage && (
-            <div className="relative w-full h-64 rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-600">
+            <div className="relative w-full h-64 rounded-lg overflow-hidden border-2 border-slate-600 bg-slate-700/50">
               <Image
                 src={selectedImage}
                 alt="Preview"
                 fill
-                className="object-contain bg-gray-100 dark:bg-gray-800"
+                className="object-contain"
               />
+              {file && (
+                <button
+                  onClick={() => {
+                    setSelectedImage(null);
+                    setFile(null);
+                  }}
+                  className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 rounded-full p-2 transition"
+                >
+                  <FiX className="text-white" />
+                </button>
+              )}
             </div>
           )}
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-slate-300 mb-2">
               Additional Context (Optional)
             </label>
             <input
@@ -159,7 +174,7 @@ export default function DeepfakeDetector() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="e.g., Person's name, context, or any known details..."
-              className="w-full p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none transition"
+              className="w-full p-3 border-2 border-slate-600 rounded-lg bg-slate-700/50 text-white placeholder-slate-500 focus:border-purple-400 focus:outline-none transition"
               disabled={loading}
             />
           </div>
@@ -167,7 +182,7 @@ export default function DeepfakeDetector() {
           <button
             onClick={handleAnalyze}
             disabled={loading || !file}
-            className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition transform hover:scale-105 active:scale-95"
+            className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 disabled:from-slate-600 disabled:to-slate-700 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition transform hover:scale-105 active:scale-95"
           >
             {loading ? (
               <>
@@ -184,61 +199,62 @@ export default function DeepfakeDetector() {
         </div>
 
         {error && (
-          <div className="bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-800 dark:text-red-200 px-4 py-3 rounded-lg mb-6">
+          <div className="bg-red-500/20 border border-red-500/30 text-red-300 px-4 py-3 rounded-lg mb-6 flex gap-2">
+            <FiAlertTriangle className="flex-shrink-0 mt-0.5" />
             {error}
           </div>
         )}
 
         {/* Results Section */}
         {result && (
-          <div className="space-y-6 animate-fadeIn">
+          <div className="space-y-4 animate-fadeIn">
             {/* Authenticity Score */}
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 p-6 rounded-lg border border-purple-200 dark:border-gray-600">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/30 p-6 rounded-xl">
+              <h3 className="text-lg font-semibold text-slate-200 mb-4">
                 Authenticity Score
               </h3>
-              <div className="flex items-center gap-4">
-                <div className="relative w-32 h-32">
+              <div className="flex items-center gap-6">
+                <div className="relative w-40 h-40">
                   <svg className="w-full h-full transform -rotate-90">
                     <circle
-                      cx="64"
-                      cy="64"
-                      r="60"
+                      cx="80"
+                      cy="80"
+                      r="70"
                       stroke="currentColor"
                       strokeWidth="8"
                       fill="none"
-                      className="text-gray-300 dark:text-gray-600"
+                      className="text-slate-700"
                     />
                     <circle
-                      cx="64"
-                      cy="64"
-                      r="60"
+                      cx="80"
+                      cy="80"
+                      r="70"
                       stroke="currentColor"
                       strokeWidth="8"
                       fill="none"
-                      strokeDasharray={`${(result.authenticityScore * 3.77) / 100} 377`}
+                      strokeDasharray={`${(result.authenticityScore * 4.4) / 100} 439.8`}
                       className={`transition-all duration-1000 ${getAuthenticityColor(result.authenticityScore)}`}
                     />
                   </svg>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <span
-                      className={`text-3xl font-bold ${getAuthenticityColor(result.authenticityScore)}`}
+                      className={`text-4xl font-bold ${getAuthenticityColor(result.authenticityScore)}`}
                     >
                       {result.authenticityScore}%
                     </span>
                   </div>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                <div className="flex-1">
+                  <p className="text-sm text-slate-400 mb-3">
                     Classification
                   </p>
                   <span
-                    className={`inline-block px-4 py-2 rounded-full font-bold text-sm ${getClassificationColor(result.classification)}`}
+                    className={`inline-block px-4 py-2 rounded-full font-bold text-sm border ${getClassificationColor(result.classification)}`}
                   >
                     {result.classification.replace(/_/g, " ")}
                   </span>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
-                    Confidence: <span className="font-bold">{result.confidence}%</span>
+                  <p className="text-sm text-slate-400 mt-4">
+                    Confidence: <span className="font-bold text-slate-200">{result.confidence}%</span>
                   </p>
                 </div>
               </div>

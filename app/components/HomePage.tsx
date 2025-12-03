@@ -81,15 +81,16 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
-        {/* Background Effects */}
+        {/* Background Effects - Enhanced */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-20 left-1/4 w-72 h-72 bg-blue-500/15 rounded-full blur-3xl animate-pulse-glow"></div>
+          <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500/15 rounded-full blur-3xl animate-pulse-glow" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 right-1/3 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl animate-float"></div>
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight">
+          <div className="space-y-4 animate-slide-up">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight animate-neon-glow">
               Trust the Truth
             </h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto">
@@ -98,10 +99,10 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 animate-slide-up" style={{animationDelay: '0.2s'}}>
             <Link
               href="/detector"
-              className="group relative px-8 py-4 text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl hover:shadow-2xl hover:shadow-blue-500/50 transition transform hover:scale-105 active:scale-95"
+              className="group relative px-8 py-4 text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl hover:shadow-2xl hover:shadow-blue-500/50 transition transform hover:scale-105 active:scale-95 overflow-hidden"
             >
               <span className="relative z-10">Start Detecting Now</span>
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition"></div>
@@ -123,9 +124,10 @@ export default function HomePage() {
             ].map((stat, i) => (
               <div
                 key={i}
-                className="bg-white/5 border border-slate-700 rounded-lg p-6 hover:bg-white/10 transition"
+                className="bg-white/5 border border-slate-700 rounded-lg p-6 hover:bg-white/10 transition card-glow animate-scale-pop"
+                style={{animationDelay: `${i * 0.15}s`}}
               >
-                <div className="text-3xl font-bold text-blue-400">{stat.number}</div>
+                <div className="text-3xl font-bold text-blue-400 animate-pulse">{stat.number}</div>
                 <div className="text-slate-400">{stat.label}</div>
               </div>
             ))}
@@ -139,8 +141,8 @@ export default function HomePage() {
         className="py-20 px-4 bg-gradient-to-b from-transparent to-slate-900/50"
       >
         <div className="max-w-6xl mx-auto space-y-16">
-          <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold">
+          <div className="text-center space-y-4 animate-slide-up">
+            <h2 className="text-4xl md:text-5xl font-bold animate-neon-glow">
               Powerful Detection Features
             </h2>
             <p className="text-slate-400 text-lg">
@@ -151,10 +153,10 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Fake News Detection */}
-            <div className="group bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/30 rounded-2xl p-8 hover:border-blue-400/60 hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-500/20 transition">
+            <div className="group bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/30 rounded-2xl p-8 hover:border-blue-400/60 hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-500/20 transition card-glow animate-slide-left">
               <div className="flex items-center gap-4 mb-6">
                 <div className="p-3 bg-blue-500/20 rounded-lg">
-                  <FiAlertCircle className="text-blue-400 text-2xl" />
+                  <FiAlertCircle className="text-blue-400 text-2xl animate-pulse-glow" />
                 </div>
                 <h3 className="text-2xl font-bold">Fake News Detector</h3>
               </div>
@@ -179,10 +181,10 @@ export default function HomePage() {
             </div>
 
             {/* Deepfake Detection */}
-            <div className="group bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/30 rounded-2xl p-8 hover:border-purple-400/60 hover:bg-gradient-to-br hover:from-purple-500/20 hover:to-pink-500/20 transition">
+            <div className="group bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/30 rounded-2xl p-8 hover:border-purple-400/60 hover:bg-gradient-to-br hover:from-purple-500/20 hover:to-pink-500/20 transition card-glow animate-slide-right">
               <div className="flex items-center gap-4 mb-6">
                 <div className="p-3 bg-purple-500/20 rounded-lg">
-                  <FiShield className="text-purple-400 text-2xl" />
+                  <FiShield className="text-purple-400 text-2xl animate-pulse-glow" />
                 </div>
                 <h3 className="text-2xl font-bold">Deepfake Detector</h3>
               </div>
@@ -212,8 +214,8 @@ export default function HomePage() {
       {/* How It Works Section */}
       <section id="how-it-works" className="py-20 px-4">
         <div className="max-w-6xl mx-auto space-y-16">
-          <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold">How It Works</h2>
+          <div className="text-center space-y-4 animate-slide-up">
+            <h2 className="text-4xl md:text-5xl font-bold animate-neon-glow">How It Works</h2>
             <p className="text-slate-400 text-lg">
               Simple, fast, and incredibly accurate analysis powered by Gemini AI
             </p>
@@ -248,10 +250,11 @@ export default function HomePage() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="relative group bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:border-blue-400/50 transition"
+                className="relative group bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:border-blue-400/50 transition card-glow animate-scale-pop"
+                style={{animationDelay: `${i * 0.15}s`}}
               >
-                <div className="text-4xl mb-4">{item.icon}</div>
-                <div className="absolute -top-4 -left-4 w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center font-bold text-lg">
+                <div className="text-4xl mb-4 animate-float">{item.icon}</div>
+                <div className="absolute -top-4 -left-4 w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center font-bold text-lg animate-pulse-glow">
                   {item.step}
                 </div>
                 <h3 className="text-xl font-bold mb-2">{item.title}</h3>
@@ -264,9 +267,9 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="py-20 px-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-y border-slate-700">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+        <div className="max-w-4xl mx-auto text-center space-y-8 animate-slide-up">
           <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold">
+            <h2 className="text-4xl md:text-5xl font-bold animate-neon-glow">
               Stop Misinformation Today
             </h2>
             <p className="text-xl text-slate-300">
@@ -342,7 +345,8 @@ export default function HomePage() {
             </div>
           </div>
           <div className="border-t border-slate-800 pt-8 text-center text-slate-400 text-sm">
-            <p>© 2024 TruthMatrix. All rights reserved.</p>
+            <p>© 2025 TruthMatrix. All rights reserved.</p>
+            <p className="mt-2">Built with ❤️ by <a href="https://www.arhanansari.me/" className="hover:text-blue-400 transition">Arhan Ansari</a></p>
           </div>
         </div>
       </footer>
