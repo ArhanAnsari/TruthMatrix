@@ -221,91 +221,124 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Horizontal Steps with Central Hub */}
-          <div className="relative w-full py-20">
-            {/* SVG Background with connections */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+          {/* Circular Steps with Central Hub */}
+          <div className="relative w-full h-96 flex items-center justify-center">
+            {/* SVG for curved connections */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet">
               <defs>
                 <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.6" />
-                  <stop offset="50%" stopColor="#a855f7" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.6" />
+                  <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.5" />
+                  <stop offset="50%" stopColor="#a855f7" stopOpacity="0.7" />
+                  <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.5" />
                 </linearGradient>
               </defs>
 
-              {/* Center circle with Gemini AI */}
-              <circle cx="50%" cy="50%" r="80" fill="url(#lineGradient)" opacity="0.1" />
-              <circle cx="50%" cy="50%" r="80" fill="none" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.4" />
-
-              {/* Curved lines connecting to center */}
-              <path d="M 100 200 Q 300 150, 450 200" fill="none" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.5" />
-              <path d="M 900 200 Q 700 150, 550 200" fill="none" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.5" />
+              {/* Curved line top-left to center */}
+              <path d="M 100 100 Q 350 150, 450 180" fill="none" stroke="url(#lineGradient)" strokeWidth="2" />
               
-              {/* Bottom curve lines */}
-              <path d="M 200 350 Q 350 380, 450 320" fill="none" stroke="url(#lineGradient)" strokeWidth="1.5" opacity="0.3" />
-              <path d="M 800 350 Q 650 380, 550 320" fill="none" stroke="url(#lineGradient)" strokeWidth="1.5" opacity="0.3" />
+              {/* Curved line top-right to center */}
+              <path d="M 900 100 Q 650 150, 550 180" fill="none" stroke="url(#lineGradient)" strokeWidth="2" />
+              
+              {/* Curved line bottom-left to center */}
+              <path d="M 150 320 Q 350 280, 450 240" fill="none" stroke="url(#lineGradient)" strokeWidth="2" />
+              
+              {/* Curved line bottom-right to center */}
+              <path d="M 850 320 Q 650 280, 550 240" fill="none" stroke="url(#lineGradient)" strokeWidth="2" />
+
+              {/* Center circle */}
+              <circle cx="500" cy="200" r="60" fill="none" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.6" />
+              <circle cx="500" cy="200" r="55" fill="url(#lineGradient)" opacity="0.08" />
             </svg>
 
-            {/* Steps Container */}
-            <div className="relative flex justify-between items-start px-4 gap-6">
-              {[
-                {
-                  title: "Upload Content",
-                  description: "Paste news text or upload an image to analyze",
-                  icon: "📤",
-                },
-                {
-                  title: "AI Analysis",
-                  description: "Gemini AI processes your content in seconds",
-                  icon: "🤖",
-                },
-                {
-                  title: "Detailed Report",
-                  description: "Get comprehensive analysis with key findings",
-                  icon: "📊",
-                },
-                {
-                  title: "Take Action",
-                  description: "Use insights to make informed decisions",
-                  icon: "✅",
-                },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="flex-1 max-w-xs relative group animate-scale-pop"
-                  style={{ animationDelay: `${i * 0.15}s` }}
-                >
+            {/* Steps Container - Circular arrangement */}
+            <div className="relative w-full h-full flex items-center justify-center">
+              {/* Step 1 - Top Left */}
+              <div className="absolute animate-scale-pop" style={{ left: "5%", top: "10%", animationDelay: "0s" }}>
+                <div className="relative group">
+                  {/* Step number badge */}
+                  <div className="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center font-bold text-white text-sm z-40 shadow-lg">
+                    1
+                  </div>
+                  
                   {/* Card */}
-                  <div className="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-6 hover:border-blue-400/50 hover:bg-slate-800/80 transition-all duration-300 card-glow h-full relative">
-                    {/* Corner accent - purple gradient */}
+                  <div className="bg-slate-800/70 border border-slate-700/80 rounded-2xl p-6 w-48 hover:border-blue-400/50 hover:bg-slate-800/90 transition-all duration-300 relative">
+                    {/* Corner accent */}
                     <div className="absolute top-0 left-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-bl-lg opacity-80"></div>
-
-                    {/* Icon */}
-                    <div className="text-5xl mb-4 animate-float">{item.icon}</div>
-
-                    {/* Title */}
-                    <h3 className="text-xl font-bold mb-3 text-white">{item.title}</h3>
-
-                    {/* Description */}
-                    <p className="text-slate-400 text-sm leading-relaxed">{item.description}</p>
-
-                    {/* Subtle connecting dots */}
-                    {i < 3 && (
-                      <div className="absolute -right-8 top-1/2 transform -translate-y-1/2 z-20">
-                        <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-sm opacity-60"></div>
-                      </div>
-                    )}
+                    
+                    <div className="text-4xl mb-3">📤</div>
+                    <h3 className="text-lg font-bold mb-2 text-white">Upload Content</h3>
+                    <p className="text-slate-400 text-xs leading-relaxed">Paste news text or upload an image to analyze</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
 
-            {/* Center Gemini AI Hub */}
-            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
-              <div className="w-32 h-32 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full border-2 border-blue-400/40 flex items-center justify-center animate-pulse-glow shadow-lg shadow-blue-500/20">
-                <div className="text-center">
-                  <div className="text-4xl mb-2">🎯</div>
-                  <p className="text-sm font-bold text-blue-200">Gemini AI</p>
+              {/* Step 2 - Top Right */}
+              <div className="absolute animate-scale-pop" style={{ right: "5%", top: "10%", animationDelay: "0.15s" }}>
+                <div className="relative group">
+                  {/* Step number badge */}
+                  <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center font-bold text-white text-sm z-40 shadow-lg">
+                    2
+                  </div>
+                  
+                  {/* Card */}
+                  <div className="bg-slate-800/70 border border-slate-700/80 rounded-2xl p-6 w-48 hover:border-blue-400/50 hover:bg-slate-800/90 transition-all duration-300 relative">
+                    {/* Corner accent */}
+                    <div className="absolute top-0 right-0 w-8 h-8 bg-gradient-to-bl from-purple-500 to-pink-500 rounded-bl-lg opacity-80"></div>
+                    
+                    <div className="text-4xl mb-3">🤖</div>
+                    <h3 className="text-lg font-bold mb-2 text-white">AI Analysis</h3>
+                    <p className="text-slate-400 text-xs leading-relaxed">Gemini AI processes your content in seconds</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 3 - Bottom Left */}
+              <div className="absolute animate-scale-pop" style={{ left: "5%", bottom: "10%", animationDelay: "0.3s" }}>
+                <div className="relative group">
+                  {/* Step number badge */}
+                  <div className="absolute -bottom-3 -left-3 w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center font-bold text-white text-sm z-40 shadow-lg">
+                    3
+                  </div>
+                  
+                  {/* Card */}
+                  <div className="bg-slate-800/70 border border-slate-700/80 rounded-2xl p-6 w-48 hover:border-blue-400/50 hover:bg-slate-800/90 transition-all duration-300 relative">
+                    {/* Corner accent */}
+                    <div className="absolute bottom-0 left-0 w-8 h-8 bg-gradient-to-tr from-purple-500 to-pink-500 rounded-tr-lg opacity-80"></div>
+                    
+                    <div className="text-4xl mb-3">📊</div>
+                    <h3 className="text-lg font-bold mb-2 text-white">Detailed Report</h3>
+                    <p className="text-slate-400 text-xs leading-relaxed">Get comprehensive analysis with key findings</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 4 - Bottom Right */}
+              <div className="absolute animate-scale-pop" style={{ right: "5%", bottom: "10%", animationDelay: "0.45s" }}>
+                <div className="relative group">
+                  {/* Step number badge */}
+                  <div className="absolute -bottom-3 -right-3 w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center font-bold text-white text-sm z-40 shadow-lg">
+                    4
+                  </div>
+                  
+                  {/* Card */}
+                  <div className="bg-slate-800/70 border border-slate-700/80 rounded-2xl p-6 w-48 hover:border-blue-400/50 hover:bg-slate-800/90 transition-all duration-300 relative">
+                    {/* Corner accent */}
+                    <div className="absolute bottom-0 right-0 w-8 h-8 bg-gradient-to-tl from-purple-500 to-pink-500 rounded-tl-lg opacity-80"></div>
+                    
+                    <div className="text-4xl mb-3">✅</div>
+                    <h3 className="text-lg font-bold mb-2 text-white">Take Action</h3>
+                    <p className="text-slate-400 text-xs leading-relaxed">Use insights to make informed decisions</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Center Gemini AI Hub */}
+              <div className="absolute z-50">
+                <div className="w-28 h-28 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-full border-2 border-blue-400/60 flex items-center justify-center animate-pulse-glow shadow-2xl shadow-blue-500/30">
+                  <div className="text-center">
+                    <div className="text-3xl mb-1">🎯</div>
+                    <p className="text-xs font-bold text-blue-200">Gemini AI</p>
+                  </div>
                 </div>
               </div>
             </div>
