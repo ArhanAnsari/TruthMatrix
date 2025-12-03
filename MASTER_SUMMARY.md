@@ -54,7 +54,7 @@ model: google("gemini-2.5-flash")   // ✅ Latest multimodal model (supports ima
 **Solution**: Updated all references
 - File: `.env.local`
   ```dotenv
-  GOOGLE_GENERATIVE_AI_API_KEY=AIzaSyA7gEkOAee-KJnZ9WxmCmbUUSq9odbxSgU
+  GOOGLE_GENERATIVE_AI_API_KEY=your_api_key_here
   ```
 - Files Updated:
   - `app/api/detect-news/route.ts` (Line 23)
@@ -195,7 +195,7 @@ gemini-2.5-flash:
 ```dotenv
 # Google Generative AI API Key
 # This is the OFFICIAL variable name for Vercel AI SDK
-GOOGLE_GENERATIVE_AI_API_KEY=AIzaSyA7gEkOAee-KJnZ9WxmCmbUUSq9odbxSgU
+GOOGLE_GENERATIVE_AI_API_KEY=your_api_key_here
 ```
 
 **Security Notes**:

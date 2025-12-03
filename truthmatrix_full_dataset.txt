@@ -1,0 +1,242 @@
+TruthMatrix Dataset
+
+100 Fake News Samples
+
+1.  Real: Verified news-style sample about science, space, health, or
+    technology (sample #1).
+2.  Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #2).
+3.  Real: Verified news-style sample about science, space, health, or
+    technology (sample #3).
+4.  Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #4).
+5.  Real: Verified news-style sample about science, space, health, or
+    technology (sample #5).
+6.  Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #6).
+7.  Real: Verified news-style sample about science, space, health, or
+    technology (sample #7).
+8.  Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #8).
+9.  Real: Verified news-style sample about science, space, health, or
+    technology (sample #9).
+10. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #10).
+11. Real: Verified news-style sample about science, space, health, or
+    technology (sample #11).
+12. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #12).
+13. Real: Verified news-style sample about science, space, health, or
+    technology (sample #13).
+14. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #14).
+15. Real: Verified news-style sample about science, space, health, or
+    technology (sample #15).
+16. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #16).
+17. Real: Verified news-style sample about science, space, health, or
+    technology (sample #17).
+18. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #18).
+19. Real: Verified news-style sample about science, space, health, or
+    technology (sample #19).
+20. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #20).
+21. Real: Verified news-style sample about science, space, health, or
+    technology (sample #21).
+22. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #22).
+23. Real: Verified news-style sample about science, space, health, or
+    technology (sample #23).
+24. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #24).
+25. Real: Verified news-style sample about science, space, health, or
+    technology (sample #25).
+26. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #26).
+27. Real: Verified news-style sample about science, space, health, or
+    technology (sample #27).
+28. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #28).
+29. Real: Verified news-style sample about science, space, health, or
+    technology (sample #29).
+30. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #30).
+31. Real: Verified news-style sample about science, space, health, or
+    technology (sample #31).
+32. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #32).
+33. Real: Verified news-style sample about science, space, health, or
+    technology (sample #33).
+34. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #34).
+35. Real: Verified news-style sample about science, space, health, or
+    technology (sample #35).
+36. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #36).
+37. Real: Verified news-style sample about science, space, health, or
+    technology (sample #37).
+38. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #38).
+39. Real: Verified news-style sample about science, space, health, or
+    technology (sample #39).
+40. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #40).
+41. Real: Verified news-style sample about science, space, health, or
+    technology (sample #41).
+42. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #42).
+43. Real: Verified news-style sample about science, space, health, or
+    technology (sample #43).
+44. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #44).
+45. Real: Verified news-style sample about science, space, health, or
+    technology (sample #45).
+46. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #46).
+47. Real: Verified news-style sample about science, space, health, or
+    technology (sample #47).
+48. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #48).
+49. Real: Verified news-style sample about science, space, health, or
+    technology (sample #49).
+50. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #50).
+51. Real: Verified news-style sample about science, space, health, or
+    technology (sample #51).
+52. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #52).
+53. Real: Verified news-style sample about science, space, health, or
+    technology (sample #53).
+54. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #54).
+55. Real: Verified news-style sample about science, space, health, or
+    technology (sample #55).
+56. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #56).
+57. Real: Verified news-style sample about science, space, health, or
+    technology (sample #57).
+58. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #58).
+59. Real: Verified news-style sample about science, space, health, or
+    technology (sample #59).
+60. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #60).
+61. Real: Verified news-style sample about science, space, health, or
+    technology (sample #61).
+62. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #62).
+63. Real: Verified news-style sample about science, space, health, or
+    technology (sample #63).
+64. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #64).
+65. Real: Verified news-style sample about science, space, health, or
+    technology (sample #65).
+66. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #66).
+67. Real: Verified news-style sample about science, space, health, or
+    technology (sample #67).
+68. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #68).
+69. Real: Verified news-style sample about science, space, health, or
+    technology (sample #69).
+70. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #70).
+71. Real: Verified news-style sample about science, space, health, or
+    technology (sample #71).
+72. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #72).
+73. Real: Verified news-style sample about science, space, health, or
+    technology (sample #73).
+74. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #74).
+75. Real: Verified news-style sample about science, space, health, or
+    technology (sample #75).
+76. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #76).
+77. Real: Verified news-style sample about science, space, health, or
+    technology (sample #77).
+78. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #78).
+79. Real: Verified news-style sample about science, space, health, or
+    technology (sample #79).
+80. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #80).
+81. Real: Verified news-style sample about science, space, health, or
+    technology (sample #81).
+82. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #82).
+83. Real: Verified news-style sample about science, space, health, or
+    technology (sample #83).
+84. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #84).
+85. Real: Verified news-style sample about science, space, health, or
+    technology (sample #85).
+86. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #86).
+87. Real: Verified news-style sample about science, space, health, or
+    technology (sample #87).
+88. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #88).
+89. Real: Verified news-style sample about science, space, health, or
+    technology (sample #89).
+90. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #90).
+91. Real: Verified news-style sample about science, space, health, or
+    technology (sample #91).
+92. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #92).
+93. Real: Verified news-style sample about science, space, health, or
+    technology (sample #93).
+94. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #94).
+95. Real: Verified news-style sample about science, space, health, or
+    technology (sample #95).
+96. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #96).
+97. Real: Verified news-style sample about science, space, health, or
+    technology (sample #97).
+98. Fake: Claim that XYZ technology/product/event is happening without
+    evidence (sample #98).
+99. Real: Verified news-style sample about science, space, health, or
+    technology (sample #99).
+100. Fake: Claim that XYZ technology/product/event is happening without
+     evidence (sample #100).
+
+Mini Deepfake Dataset (20 Samples)
+
+1.  real_image_1.png — REAL — AI-generated human face from safe sources.
+2.  fake_image_2.png — FAKE — AI-generated manipulated face or
+    face-swap.
+3.  real_image_3.png — REAL — AI-generated human face from safe sources.
+4.  fake_image_4.png — FAKE — AI-generated manipulated face or
+    face-swap.
+5.  real_image_5.png — REAL — AI-generated human face from safe sources.
+6.  fake_image_6.png — FAKE — AI-generated manipulated face or
+    face-swap.
+7.  real_image_7.png — REAL — AI-generated human face from safe sources.
+8.  fake_image_8.png — FAKE — AI-generated manipulated face or
+    face-swap.
+9.  real_image_9.png — REAL — AI-generated human face from safe sources.
+10. fake_image_10.png — FAKE — AI-generated manipulated face or
+    face-swap.
+11. real_image_11.png — REAL — AI-generated human face from safe
+    sources.
+12. fake_image_12.png — FAKE — AI-generated manipulated face or
+    face-swap.
+13. real_image_13.png — REAL — AI-generated human face from safe
+    sources.
+14. fake_image_14.png — FAKE — AI-generated manipulated face or
+    face-swap.
+15. real_image_15.png — REAL — AI-generated human face from safe
+    sources.
+16. fake_image_16.png — FAKE — AI-generated manipulated face or
+    face-swap.
+17. real_image_17.png — REAL — AI-generated human face from safe
+    sources.
+18. fake_image_18.png — FAKE — AI-generated manipulated face or
+    face-swap.
+19. real_image_19.png — REAL — AI-generated human face from safe
+    sources.
+20. fake_image_20.png — FAKE — AI-generated manipulated face or
+    face-swap.

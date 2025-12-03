@@ -1,0 +1,19 @@
+TruthMatrix Sample Dataset
+
+Fake News Samples
+
+1.  Scientists discover water on Mars containing fish-like organisms —
+    fake
+2.  ISRO successfully tests reusable launch vehicle for future missions
+    — real
+3.  Government approves flying cars for public transportation by 2025 —
+    fake
+4.  WHO confirms decrease in global COVID-19 cases this month — real
+
+Deepfake Metadata Samples
+
+1.  video_01 — personA_real.png — real — Stock image, no identity
+2.  video_02 — personA_fake_swap.png — fake — AI-generated faceswap
+3.  video_03 — personB_real.png — real — AI-generated human face
+4.  video_04 — personB_fake_lipsync.png — fake — Manipulated facial
+    region

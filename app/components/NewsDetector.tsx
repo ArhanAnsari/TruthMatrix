@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FiSearch, FiLoader, FiChevronDown, FiCheckCircle, FiAlertTriangle } from "react-icons/fi";
+import RichContentRenderer from "./RichContentRenderer";
 
 interface NewsAnalysis {
   credibilityScore: number;
@@ -203,14 +204,16 @@ export default function NewsDetector() {
                   <FiChevronDown className={`transition-transform ${expandedSection === "findings" ? "rotate-180" : ""}`} />
                 </div>
                 {expandedSection === "findings" && (
-                  <ul className="space-y-2 mt-4">
+                  <div className="mt-4 space-y-3">
                     {result.keyFindings.map((finding, i) => (
-                      <li key={i} className="text-green-300 flex gap-2">
-                        <span className="text-green-400 font-bold">✓</span>
-                        {finding}
-                      </li>
+                      <div key={i} className="text-green-300 flex gap-3">
+                        <span className="text-green-400 font-bold flex-shrink-0">✓</span>
+                        <div className="flex-1">
+                          <RichContentRenderer content={finding} className="prose-invert max-w-none text-sm" />
+                        </div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 )}
               </button>
             )}
@@ -228,14 +231,16 @@ export default function NewsDetector() {
                   <FiChevronDown className={`transition-transform ${expandedSection === "flags" ? "rotate-180" : ""}`} />
                 </div>
                 {expandedSection === "flags" && (
-                  <ul className="space-y-2 mt-4">
+                  <div className="mt-4 space-y-3">
                     {result.redFlags.map((flag, i) => (
-                      <li key={i} className="text-red-300 flex gap-2">
-                        <span className="text-red-400 font-bold">⚠</span>
-                        {flag}
-                      </li>
+                      <div key={i} className="text-red-300 flex gap-3">
+                        <span className="text-red-400 font-bold flex-shrink-0">⚠</span>
+                        <div className="flex-1">
+                          <RichContentRenderer content={flag} className="prose-invert max-w-none text-sm" />
+                        </div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 )}
               </button>
             )}
@@ -270,9 +275,7 @@ export default function NewsDetector() {
               <h3 className="text-lg font-semibold text-indigo-300 mb-3">
                 📊 Analysis Reasoning
               </h3>
-              <p className="text-slate-300 leading-relaxed">
-                {result.reasoning}
-              </p>
+              <RichContentRenderer content={result.reasoning} className="prose-invert max-w-none" />
             </div>
 
             {/* Recommendations */}
@@ -281,17 +284,7 @@ export default function NewsDetector() {
                 <h3 className="text-lg font-semibold text-purple-300 mb-3">
                   💡 Recommendations
                 </h3>
-                <ul className="space-y-2">
-                  {result.recommendations.map((rec, i) => (
-                    <li
-                      key={i}
-                      className="text-purple-300 flex gap-2"
-                    >
-                      <span className="text-purple-400 font-bold">•</span>
-                      {rec}
-                    </li>
-                  ))}
-                </ul>
+                <RichContentRenderer content={result.recommendations.join("\n- ")} className="prose-invert max-w-none" />
               </div>
             )}
           </div>

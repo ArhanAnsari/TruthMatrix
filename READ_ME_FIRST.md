@@ -134,7 +134,7 @@ Done! Show the app to judges
 
 **File**: `.env.local` (already configured)
 ```
-GOOGLE_GENERATIVE_AI_API_KEY=AIzaSyA7gEkOAee-KJnZ9WxmCmbUUSq9odbxSgU
+GOOGLE_GENERATIVE_AI_API_KEY=your_api_key_here
 ```
 
 **No additional configuration needed!** ✅

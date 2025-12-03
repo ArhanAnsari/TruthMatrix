@@ -34,22 +34,47 @@ export async function POST(request: NextRequest) {
 You are an expert misinformation detector.
 Analyze the text below and respond ONLY with valid JSON.
 
+Use Markdown formatting in your text responses for better readability.
+For mathematical expressions, use LaTeX notation:
+- Inline math: $expression$
+- Block math: $$expression$$
+
 TEXT:
 ${text}
 
 SOURCE:
 ${source || "unknown"}
 
+INSTRUCTIONS:
+- Use clear Markdown formatting with headers, lists, bold, italics
+- Include LaTeX equations if relevant to statistical/mathematical analysis
+- Make findings scannable with bullet points and formatting
+- Use numbered lists for steps or sequences
+- Highlight key terms in **bold** for emphasis
+
 JSON ONLY:
 {
-  "credibilityScore": number,
-  "classification": "LIKELY_TRUE" | "LIKELY_FALSE" | "UNVERIFIABLE",
-  "confidence": number,
-  "keyFindings": [],
-  "redFlags": [],
-  "factsToVerify": [],
-  "reasoning": "",
-  "recommendations": []
+  "credibilityScore": number (0-100),
+  "classification": "LIKELY_TRUE or LIKELY_FALSE or UNVERIFIABLE",
+  "confidence": number (0-100),
+  "keyFindings": [
+    "Bold finding: Detailed explanation with context",
+    "Can include italic text, code snippets, links, and LaTeX formulas"
+  ],
+  "redFlags": [
+    "Red flag with emphasis and context",
+    "Use markdown, lists, and LaTeX where appropriate"
+  ],
+  "factsToVerify": [
+    "Claim to verify with supporting context",
+    "Can use Markdown formatting and LaTeX"
+  ],
+  "reasoning": "Detailed Analysis section with markdown headers, bullet points, LaTeX equations, and bold conclusions",
+  "recommendations": [
+    "Use numbered format for sequential steps",
+    "Support Markdown and LaTeX in recommendations",
+    "Provide actionable advice with formatting"
+  ]
 }
     `;
 

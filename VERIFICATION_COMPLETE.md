@@ -16,7 +16,7 @@
 - **Status**: ✅ CONFIRMED
 - **Verification**:
   ```
-  GOOGLE_GENERATIVE_AI_API_KEY=AIzaSyA7gEkOAee-KJnZ9WxmCmbUUSq9odbxSgU
+  GOOGLE_GENERATIVE_AI_API_KEY=your_api_key_here
   ```
 
 ### Fix #2: API Route - News Detector ✅
