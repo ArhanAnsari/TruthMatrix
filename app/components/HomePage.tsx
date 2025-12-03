@@ -213,7 +213,7 @@ export default function HomePage() {
 
       {/* How It Works Section */}
       <section id="how-it-works" className="py-20 px-4">
-        <div className="max-w-6xl mx-auto space-y-16">
+        <div className="max-w-7xl mx-auto space-y-16">
           <div className="text-center space-y-4 animate-slide-up">
             <h2 className="text-4xl md:text-5xl font-bold animate-neon-glow">How It Works</h2>
             <p className="text-slate-400 text-lg">
@@ -221,46 +221,94 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {[
-              {
-                step: "1",
-                title: "Upload Content",
-                description: "Paste news text or upload an image to analyze",
-                icon: "📤",
-              },
-              {
-                step: "2",
-                title: "AI Analysis",
-                description: "Gemini AI processes your content in seconds",
-                icon: "🤖",
-              },
-              {
-                step: "3",
-                title: "Detailed Report",
-                description: "Get comprehensive analysis with key findings",
-                icon: "📊",
-              },
-              {
-                step: "4",
-                title: "Take Action",
-                description: "Use insights to make informed decisions",
-                icon: "✅",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="relative group bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:border-blue-400/50 transition card-glow animate-scale-pop"
-                style={{animationDelay: `${i * 0.15}s`}}
-              >
-                <div className="text-4xl mb-4 animate-float">{item.icon}</div>
-                <div className="absolute -top-4 -left-4 w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center font-bold text-lg animate-pulse-glow">
-                  {item.step}
+          {/* Horizontal Steps with Central Hub */}
+          <div className="relative w-full py-20">
+            {/* SVG Background with connections */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.6" />
+                  <stop offset="50%" stopColor="#a855f7" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.6" />
+                </linearGradient>
+              </defs>
+
+              {/* Center circle with Gemini AI */}
+              <circle cx="50%" cy="50%" r="80" fill="url(#lineGradient)" opacity="0.1" />
+              <circle cx="50%" cy="50%" r="80" fill="none" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.4" />
+
+              {/* Curved lines connecting to center */}
+              <path d="M 100 200 Q 300 150, 450 200" fill="none" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.5" />
+              <path d="M 900 200 Q 700 150, 550 200" fill="none" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.5" />
+              
+              {/* Bottom curve lines */}
+              <path d="M 200 350 Q 350 380, 450 320" fill="none" stroke="url(#lineGradient)" strokeWidth="1.5" opacity="0.3" />
+              <path d="M 800 350 Q 650 380, 550 320" fill="none" stroke="url(#lineGradient)" strokeWidth="1.5" opacity="0.3" />
+            </svg>
+
+            {/* Steps Container */}
+            <div className="relative flex justify-between items-start px-4 gap-6">
+              {[
+                {
+                  title: "Upload Content",
+                  description: "Paste news text or upload an image to analyze",
+                  icon: "📤",
+                },
+                {
+                  title: "AI Analysis",
+                  description: "Gemini AI processes your content in seconds",
+                  icon: "🤖",
+                },
+                {
+                  title: "Detailed Report",
+                  description: "Get comprehensive analysis with key findings",
+                  icon: "📊",
+                },
+                {
+                  title: "Take Action",
+                  description: "Use insights to make informed decisions",
+                  icon: "✅",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex-1 max-w-xs relative group animate-scale-pop"
+                  style={{ animationDelay: `${i * 0.15}s` }}
+                >
+                  {/* Card */}
+                  <div className="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-6 hover:border-blue-400/50 hover:bg-slate-800/80 transition-all duration-300 card-glow h-full relative">
+                    {/* Corner accent - purple gradient */}
+                    <div className="absolute top-0 left-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-bl-lg opacity-80"></div>
+
+                    {/* Icon */}
+                    <div className="text-5xl mb-4 animate-float">{item.icon}</div>
+
+                    {/* Title */}
+                    <h3 className="text-xl font-bold mb-3 text-white">{item.title}</h3>
+
+                    {/* Description */}
+                    <p className="text-slate-400 text-sm leading-relaxed">{item.description}</p>
+
+                    {/* Subtle connecting dots */}
+                    {i < 3 && (
+                      <div className="absolute -right-8 top-1/2 transform -translate-y-1/2 z-20">
+                        <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-sm opacity-60"></div>
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-slate-400">{item.description}</p>
+              ))}
+            </div>
+
+            {/* Center Gemini AI Hub */}
+            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
+              <div className="w-32 h-32 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full border-2 border-blue-400/40 flex items-center justify-center animate-pulse-glow shadow-lg shadow-blue-500/20">
+                <div className="text-center">
+                  <div className="text-4xl mb-2">🎯</div>
+                  <p className="text-sm font-bold text-blue-200">Gemini AI</p>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
