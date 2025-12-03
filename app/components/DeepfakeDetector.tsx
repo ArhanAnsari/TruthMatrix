@@ -25,21 +25,32 @@ interface DeepfakeAnalysis {
 }
 
 export default function DeepfakeDetector() {
+  const [mediaType, setMediaType] = useState<'image' | 'video'>('image');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<DeepfakeAnalysis | null>(null);
   const [error, setError] = useState("");
   const [expandedSection, setExpandedSection] = useState<string | null>("indicators");
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (!selectedFile) return;
 
-    if (!selectedFile.type.startsWith("image/")) {
+    const isImage = selectedFile.type.startsWith("image/");
+    const isVideo = selectedFile.type.startsWith("video/");
+
+    if (mediaType === 'image' && !isImage) {
       setError("Please select a valid image file");
+      return;
+    }
+
+    if (mediaType === 'video' && !isVideo) {
+      setError("Please select a valid video file");
       return;
     }
 
@@ -49,14 +60,72 @@ export default function DeepfakeDetector() {
 
     const reader = new FileReader();
     reader.onload = (event) => {
-      setSelectedImage(event.target?.result as string);
+      if (mediaType === 'image') {
+        setSelectedImage(event.target?.result as string);
+        setSelectedVideo(null);
+      } else {
+        setSelectedVideo(event.target?.result as string);
+        setSelectedImage(null);
+      }
     };
     reader.readAsDataURL(selectedFile);
   };
 
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const droppedFiles = e.dataTransfer.files;
+    if (droppedFiles.length === 0) return;
+
+    const droppedFile = droppedFiles[0];
+    const isImage = droppedFile.type.startsWith("image/");
+    const isVideo = droppedFile.type.startsWith("video/");
+
+    if (mediaType === 'image' && !isImage) {
+      setError("Please drop a valid image file");
+      return;
+    }
+
+    if (mediaType === 'video' && !isVideo) {
+      setError("Please drop a valid video file");
+      return;
+    }
+
+    setFile(droppedFile);
+    setError("");
+    setResult(null);
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (mediaType === 'image') {
+        setSelectedImage(event.target?.result as string);
+        setSelectedVideo(null);
+      } else {
+        setSelectedVideo(event.target?.result as string);
+        setSelectedImage(null);
+      }
+    };
+    reader.readAsDataURL(droppedFile);
+  };
+
   const handleAnalyze = async () => {
     if (!file) {
-      setError("Please select an image to analyze");
+      const fileType = mediaType === 'image' ? 'image' : 'video';
+      setError(`Please select a ${fileType} to analyze`);
       return;
     }
 
@@ -69,13 +138,14 @@ export default function DeepfakeDetector() {
       formData.append("file", file);
       formData.append("description", description);
 
-      const response = await fetch("/api/detect-deepfake", {
+      const endpoint = mediaType === 'video' ? "/api/detect-deepfake-video" : "/api/detect-deepfake";
+      const response = await fetch(endpoint, {
         method: "POST",
         body: formData,
       });
 
       if (!response.ok) {
-        throw new Error("Failed to analyze image");
+        throw new Error(`Failed to analyze ${mediaType}`);
       }
 
       const data = await response.json();
@@ -109,25 +179,68 @@ export default function DeepfakeDetector() {
         <div className="flex items-center gap-3 mb-2">
           <FiUpload className="text-purple-400 text-3xl" />
           <h2 className="text-3xl font-bold text-white">
-            🎭 Deepfake Detector
+            🎭 {mediaType === 'video' ? 'Video' : 'Image'} Deepfake Detector
           </h2>
         </div>
         <p className="text-slate-400 mb-8">
-          Upload an image to detect deepfakes, AI-generated content, and
+          Upload an image or video to detect deepfakes, AI-generated content, and
           manipulations
         </p>
+
+        {/* Media Type Selector */}
+        <div className="flex gap-4 mb-6">
+          <button
+            onClick={() => {
+              setMediaType('image');
+              setSelectedImage(null);
+              setSelectedVideo(null);
+              setFile(null);
+              setError("");
+            }}
+            className={`flex-1 py-2 px-4 rounded-lg font-medium transition ${
+              mediaType === 'image'
+                ? 'bg-purple-600 text-white'
+                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+            }`}
+          >
+            🖼️ Image
+          </button>
+          <button
+            onClick={() => {
+              setMediaType('video');
+              setSelectedImage(null);
+              setSelectedVideo(null);
+              setFile(null);
+              setError("");
+            }}
+            className={`flex-1 py-2 px-4 rounded-lg font-medium transition ${
+              mediaType === 'video'
+                ? 'bg-purple-600 text-white'
+                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+            }`}
+          >
+            🎬 Video
+          </button>
+        </div>
 
         {/* Upload Section */}
         <div className="space-y-4 mb-6">
           {/* File Upload Area */}
           <div
             onClick={() => fileInputRef.current?.click()}
-            className="border-2 border-dashed border-slate-600 rounded-lg p-8 text-center cursor-pointer hover:border-purple-400 hover:bg-purple-500/5 transition"
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition ${
+              isDragging
+                ? "border-purple-400 bg-purple-500/10"
+                : "border-slate-600 hover:border-purple-400 hover:bg-purple-500/5"
+            }`}
           >
             <input
               ref={fileInputRef}
               type="file"
-              accept="image/*"
+              accept={mediaType === 'video' ? 'video/*' : 'image/*'}
               onChange={handleFileSelect}
               className="hidden"
               disabled={loading}
@@ -137,23 +250,33 @@ export default function DeepfakeDetector() {
               Click to upload or drag and drop
             </p>
             <p className="text-slate-500 text-sm">
-              PNG, JPG, GIF up to 10MB
+              {mediaType === 'video' ? 'MP4, WebM, Ogg up to 500MB' : 'PNG, JPG, GIF up to 10MB'}
             </p>
           </div>
 
-          {/* Image Preview */}
-          {selectedImage && (
+          {/* Media Preview */}
+          {(selectedImage || selectedVideo) && (
             <div className="relative w-full h-64 rounded-lg overflow-hidden border-2 border-slate-600 bg-slate-700/50">
-              <Image
-                src={selectedImage}
-                alt="Preview"
-                fill
-                className="object-contain"
-              />
+              {selectedImage && (
+                <Image
+                  src={selectedImage}
+                  alt="Preview"
+                  fill
+                  className="object-contain"
+                />
+              )}
+              {selectedVideo && (
+                <video
+                  src={selectedVideo}
+                  controls
+                  className="w-full h-full object-contain"
+                />
+              )}
               {file && (
                 <button
                   onClick={() => {
                     setSelectedImage(null);
+                    setSelectedVideo(null);
                     setFile(null);
                   }}
                   className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 rounded-full p-2 transition"
@@ -192,7 +315,7 @@ export default function DeepfakeDetector() {
             ) : (
               <>
                 <FiUpload />
-                Analyze Image
+                {mediaType === 'video' ? 'Analyze Video' : 'Analyze Image'}
               </>
             )}
           </button>
