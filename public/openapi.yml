@@ -1,0 +1,264 @@
+openapi: 3.0.0
+info:
+  title: TruthMatrix API
+  description: AI-powered Fake News & Deepfake Detection API using Google Gemini
+  version: 1.0.0
+  contact:
+    name: TruthMatrix Support
+    url: https://truthmatrix.vercel.app
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://truthmatrix.vercel.app/api
+    description: Production API
+  - url: http://localhost:3000/api
+    description: Development API
+
+tags:
+  - name: Detection
+    description: Content detection endpoints
+  - name: Health
+    description: API health and status
+
+paths:
+  /detect-news:
+    post:
+      tags:
+        - Detection
+      summary: Analyze news for credibility
+      description: Analyzes text or news articles for misinformation, credibility, and red flags using AI
+      operationId: detectNews
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewsAnalysisRequest'
+      responses:
+        '200':
+          description: Successful analysis
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsAnalysisResponse'
+        '400':
+          description: Bad request - missing or invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /detect-deepfake:
+    post:
+      tags:
+        - Detection
+      summary: Analyze image for deepfakes
+      description: Analyzes images for AI-generated content, deepfakes, and manipulation signs
+      operationId: detectDeepfake
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DeepfakeAnalysisRequest'
+      responses:
+        '200':
+          description: Successful analysis
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeepfakeAnalysisResponse'
+        '400':
+          description: Bad request - missing or invalid file
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    NewsAnalysisRequest:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: News article or text to analyze
+          minLength: 10
+          maxLength: 10000
+          example: "Breaking news: Scientists discover new renewable energy source that could power the entire world"
+        source:
+          type: string
+          description: Optional source URL or attribution
+          format: uri
+          example: "https://example.com/article"
+
+    NewsAnalysisResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        analysis:
+          type: object
+          properties:
+            credibilityScore:
+              type: number
+              minimum: 0
+              maximum: 100
+              description: Credibility score (0 = least credible, 100 = most credible)
+              example: 75
+            classification:
+              type: string
+              enum: [LIKELY_TRUE, LIKELY_FALSE, UNVERIFIABLE]
+              example: LIKELY_TRUE
+            confidence:
+              type: number
+              minimum: 0
+              maximum: 100
+              description: Confidence level of the analysis
+              example: 85
+            keyFindings:
+              type: array
+              items:
+                type: string
+              example: ["Article uses credible sources", "Claims are verifiable"]
+            redFlags:
+              type: array
+              items:
+                type: string
+              example: ["Sensational headline", "Missing author attribution"]
+            factsToVerify:
+              type: array
+              items:
+                type: string
+              example: ["Statistical claim needs verification"]
+            reasoning:
+              type: string
+              example: "The article presents well-sourced claims with proper citations..."
+            recommendations:
+              type: array
+              items:
+                type: string
+              example: ["Cross-reference with official sources", "Check publication date"]
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-01-08T10:30:00Z"
+
+    DeepfakeAnalysisRequest:
+      type: object
+      required:
+        - file
+      properties:
+        file:
+          type: string
+          format: binary
+          description: Image file to analyze (JPEG, PNG, WebP)
+        description:
+          type: string
+          description: Optional context about the image
+          example: "Celebrity photo from social media"
+
+    DeepfakeAnalysisResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        analysis:
+          type: object
+          properties:
+            authenticityScore:
+              type: number
+              minimum: 0
+              maximum: 100
+              description: Authenticity score (0 = likely fake, 100 = authentic)
+              example: 92
+            classification:
+              type: string
+              enum: [AUTHENTIC, LIKELY_FAKE, AI_GENERATED, MANIPULATED]
+              example: AUTHENTIC
+            confidence:
+              type: number
+              minimum: 0
+              maximum: 100
+              description: Confidence level of the analysis
+              example: 88
+            deepfakeIndicators:
+              type: array
+              items:
+                type: string
+              example: ["No face warping detected", "Natural eye movement patterns"]
+            aiGenerationSigns:
+              type: array
+              items:
+                type: string
+              example: []
+            manipulationSigns:
+              type: array
+              items:
+                type: string
+              example: []
+            analysisDetails:
+              type: object
+              properties:
+                faceAnalysis:
+                  type: string
+                  example: "Face structure appears natural"
+                textureAnalysis:
+                  type: string
+                  example: "Skin texture consistent and natural"
+                lightingAnalysis:
+                  type: string
+                  example: "Lighting is consistent throughout"
+                eyeAnalysis:
+                  type: string
+                  example: "Eyes show natural reflection patterns"
+                hairAnalysis:
+                  type: string
+                  example: "Hair texture appears authentic"
+                shadowAnalysis:
+                  type: string
+                  example: "Shadows are consistent with light source"
+                backgroundAnalysis:
+                  type: string
+                  example: "Background appears coherent"
+            reasoning:
+              type: string
+              example: "Image shows no signs of AI generation or manipulation..."
+            recommendations:
+              type: array
+              items:
+                type: string
+              example: ["Appears to be authentic", "No immediate concerns"]
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-01-08T10:35:00Z"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+          example: "Please provide text to analyze"
+        statusCode:
+          type: integer
+          example: 400

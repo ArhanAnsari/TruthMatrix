@@ -1,0 +1,351 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import {
+  FiCheck,
+  FiAlertCircle,
+  FiZap,
+  FiShield,
+  FiMenu,
+  FiX,
+} from "react-icons/fi";
+
+export default function HomePage() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          <Link
+            href="/"
+            className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+          >
+            TruthMatrix
+          </Link>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex gap-8 items-center">
+            <Link
+              href="/detector"
+              className="hover:text-blue-400 transition font-medium"
+            >
+              Detector
+            </Link>
+            <a href="#features" className="hover:text-blue-400 transition font-medium">
+              Features
+            </a>
+            <a href="#how-it-works" className="hover:text-blue-400 transition font-medium">
+              How It Works
+            </a>
+            <Link
+              href="/detector"
+              className="bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-2 rounded-lg font-bold hover:shadow-lg hover:shadow-blue-500/50 transition"
+            >
+              Get Started
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden text-white"
+          >
+            {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="md:hidden bg-slate-800 border-t border-slate-700 p-4 space-y-4">
+            <Link href="/detector" className="block hover:text-blue-400 transition">
+              Detector
+            </Link>
+            <a href="#features" className="block hover:text-blue-400 transition">
+              Features
+            </a>
+            <a href="#how-it-works" className="block hover:text-blue-400 transition">
+              How It Works
+            </a>
+            <Link
+              href="/detector"
+              className="block bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-2 rounded-lg font-bold text-center"
+            >
+              Get Started
+            </Link>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
+          <div className="space-y-4">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight">
+              Trust the Truth
+            </h1>
+            <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto">
+              Advanced AI-powered detection for fake news and deepfakes. Protect
+              yourself from misinformation in seconds.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+            <Link
+              href="/detector"
+              className="group relative px-8 py-4 text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl hover:shadow-2xl hover:shadow-blue-500/50 transition transform hover:scale-105 active:scale-95"
+            >
+              <span className="relative z-10">Start Detecting Now</span>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition"></div>
+            </Link>
+            <a
+              href="#how-it-works"
+              className="px-8 py-4 text-lg font-bold border-2 border-slate-400 rounded-xl hover:border-blue-400 hover:text-blue-400 transition"
+            >
+              Learn More
+            </a>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12">
+            {[
+              { number: "99.2%", label: "Accuracy Rate" },
+              { number: "0.5s", label: "Analysis Time" },
+              { number: "10K+", label: "Analyses Daily" },
+            ].map((stat, i) => (
+              <div
+                key={i}
+                className="bg-white/5 border border-slate-700 rounded-lg p-6 hover:bg-white/10 transition"
+              >
+                <div className="text-3xl font-bold text-blue-400">{stat.number}</div>
+                <div className="text-slate-400">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section
+        id="features"
+        className="py-20 px-4 bg-gradient-to-b from-transparent to-slate-900/50"
+      >
+        <div className="max-w-6xl mx-auto space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold">
+              Powerful Detection Features
+            </h2>
+            <p className="text-slate-400 text-lg">
+              Our AI-powered system analyzes multiple factors to detect
+              misinformation
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Fake News Detection */}
+            <div className="group bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/30 rounded-2xl p-8 hover:border-blue-400/60 hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-500/20 transition">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 bg-blue-500/20 rounded-lg">
+                  <FiAlertCircle className="text-blue-400 text-2xl" />
+                </div>
+                <h3 className="text-2xl font-bold">Fake News Detector</h3>
+              </div>
+              <p className="text-slate-300 mb-6 leading-relaxed">
+                Analyze news articles, social media posts, and claims with
+                advanced NLP to detect misinformation patterns.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "Logical consistency analysis",
+                  "Language pattern recognition",
+                  "Emotional manipulation detection",
+                  "Source verification",
+                  "Fact-checking integration",
+                ].map((feature, i) => (
+                  <li key={i} className="flex gap-2 text-slate-300">
+                    <FiCheck className="text-green-400 flex-shrink-0 mt-1" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Deepfake Detection */}
+            <div className="group bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/30 rounded-2xl p-8 hover:border-purple-400/60 hover:bg-gradient-to-br hover:from-purple-500/20 hover:to-pink-500/20 transition">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 bg-purple-500/20 rounded-lg">
+                  <FiShield className="text-purple-400 text-2xl" />
+                </div>
+                <h3 className="text-2xl font-bold">Deepfake Detector</h3>
+              </div>
+              <p className="text-slate-300 mb-6 leading-relaxed">
+                Upload images to identify deepfakes, AI-generated content, and
+                digital manipulations with pixel-level analysis.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "Facial anomaly detection",
+                  "Lighting consistency check",
+                  "AI generation fingerprints",
+                  "Texture analysis",
+                  "Compression artifact detection",
+                ].map((feature, i) => (
+                  <li key={i} className="flex gap-2 text-slate-300">
+                    <FiCheck className="text-green-400 flex-shrink-0 mt-1" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section id="how-it-works" className="py-20 px-4">
+        <div className="max-w-6xl mx-auto space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold">How It Works</h2>
+            <p className="text-slate-400 text-lg">
+              Simple, fast, and incredibly accurate analysis powered by Gemini AI
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {[
+              {
+                step: "1",
+                title: "Upload Content",
+                description: "Paste news text or upload an image to analyze",
+                icon: "📤",
+              },
+              {
+                step: "2",
+                title: "AI Analysis",
+                description: "Gemini AI processes your content in seconds",
+                icon: "🤖",
+              },
+              {
+                step: "3",
+                title: "Detailed Report",
+                description: "Get comprehensive analysis with key findings",
+                icon: "📊",
+              },
+              {
+                step: "4",
+                title: "Take Action",
+                description: "Use insights to make informed decisions",
+                icon: "✅",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="relative group bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:border-blue-400/50 transition"
+              >
+                <div className="text-4xl mb-4">{item.icon}</div>
+                <div className="absolute -top-4 -left-4 w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center font-bold text-lg">
+                  {item.step}
+                </div>
+                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                <p className="text-slate-400">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-y border-slate-700">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
+          <div className="space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold">
+              Stop Misinformation Today
+            </h2>
+            <p className="text-xl text-slate-300">
+              Join thousands of users protecting themselves from fake news and
+              deepfakes
+            </p>
+          </div>
+          <Link
+            href="/detector"
+            className="inline-block px-10 py-4 text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl hover:shadow-2xl hover:shadow-blue-500/50 transition transform hover:scale-105 active:scale-95"
+          >
+            Start Detecting Now →
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-950 border-t border-slate-800 py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
+                TruthMatrix
+              </h3>
+              <p className="text-slate-400 text-sm">
+                Powered by Gemini AI to fight misinformation
+              </p>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Product</h4>
+              <ul className="space-y-2 text-slate-400 text-sm">
+                <li>
+                  <a href="/detector" className="hover:text-blue-400 transition">
+                    Detector
+                  </a>
+                </li>
+                <li>
+                  <a href="#features" className="hover:text-blue-400 transition">
+                    Features
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Resources</h4>
+              <ul className="space-y-2 text-slate-400 text-sm">
+                <li>
+                  <a href="#" className="hover:text-blue-400 transition">
+                    Documentation
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-blue-400 transition">
+                    API
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Legal</h4>
+              <ul className="space-y-2 text-slate-400 text-sm">
+                <li>
+                  <a href="#" className="hover:text-blue-400 transition">
+                    Privacy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-blue-400 transition">
+                    Terms
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-slate-800 pt-8 text-center text-slate-400 text-sm">
+            <p>© 2024 TruthMatrix. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

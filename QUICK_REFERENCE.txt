@@ -1,0 +1,122 @@
+📌 TRUTHMATRIX - QUICK REFERENCE CARD
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔧 IF YOU GET ERRORS:
+
+Error: "models/gemini-2.0-flash is not found"
+Solution: Check GEMINI_API_KEY in .env.local is correct
+          Visit: https://aistudio.google.com/app/apikey
+
+Error: "Cannot find module 'ai' or '@ai-sdk/google'"
+Solution: Run: npm install
+          Or: fix-install.bat
+
+Error: "Source map warnings"
+Solution: These are harmless
+          Will clear after: npm install
+
+═══════════════════════════════════════════════════════════════════════════════
+
+⚡ QUICK COMMANDS:
+
+npm run dev .................. Start development server
+npm run build ................ Build for production
+npm run start ................ Start production server
+npm install .................. Install dependencies
+npm cache clean --force ...... Clear cache
+fix-install.bat .............. Run clean install (Windows)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📁 IMPORTANT FILES:
+
+.env.local ................... Your API key (NEVER commit!)
+package.json ................. Dependencies (updated!)
+app/api/detect-news/route.ts  News analyzer (updated!)
+app/api/detect-deepfake/...   Image analyzer (updated!)
+next.config.ts ............... Config (updated!)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ SETUP CHECKLIST:
+
+☐ .env.local has GEMINI_API_KEY
+☐ Run: npm install (or fix-install.bat)
+☐ Run: npm run dev
+☐ Open: http://localhost:3000
+☐ Test fake news detector
+☐ Test deepfake detector
+☐ Both working? You're good!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 WHAT TO DO NOW:
+
+1. Double-click: fix-install.bat
+   OR manually run: npm install
+
+2. Run: npm run dev
+
+3. Visit: http://localhost:3000
+
+4. Test both detectors
+
+5. Ready for exhibition! 🏆
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📚 DOCUMENTATION:
+
+START_HERE.txt ............ Quick start
+FIX_GUIDE.md .............. Detailed fix guide
+FIX_SUMMARY.txt ........... This fix summary
+README.md ................. Full documentation
+EXHIBITION_GUIDE.md ....... Presentation tips
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🚀 VERCEL AI SDK BENEFITS:
+
+✓ Better error handling
+✓ Cleaner API
+✓ Faster responses
+✓ Production-ready
+✓ Multiple AI providers supported
+✓ Streaming support
+✓ Better TypeScript support
+
+═══════════════════════════════════════════════════════════════════════════════
+
+API KEY INFO:
+
+Where to get: https://aistudio.google.com/app/apikey
+Where to put: .env.local as GEMINI_API_KEY=your_key
+Keep safe! Don't share!
+Never commit .env.local to git
+
+═══════════════════════════════════════════════════════════════════════════════
+
+MODELS USED:
+
+Fake News: google("gemini-2.0-flash")
+Images: google("gemini-2.0-flash-vision")
+
+Both are:
+✓ Free tier available
+✓ Fast & efficient
+✓ Latest version
+✓ Most capable
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✨ YOU'RE READY!
+
+All changes made ✓
+Ready to install ✓
+Ready to test ✓
+Ready to win! ✓
+
+Next Step: Run fix-install.bat 🚀
+
+═══════════════════════════════════════════════════════════════════════════════

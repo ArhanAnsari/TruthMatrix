@@ -1,0 +1,29 @@
+# CODEOWNERS for TruthMatrix
+# This file defines who should review code changes in different parts of the project
+
+# Default owners for everything in the repo
+* @yourusername
+
+# API routes and backend logic
+/app/api/ @yourusername
+
+# Components and UI
+/app/components/ @yourusername
+
+# Configuration files
+/package.json @yourusername
+/tsconfig.json @yourusername
+/next.config.ts @yourusername
+/.env.local @yourusername
+
+# Documentation
+*.md @yourusername
+/docs/ @yourusername
+
+# CI/CD and deployment
+/.github/ @yourusername
+Dockerfile @yourusername
+
+# Type definitions and global types
+/**/*.d.ts @yourusername
+/types/ @yourusername

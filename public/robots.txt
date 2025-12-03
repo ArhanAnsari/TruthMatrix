@@ -1,0 +1,56 @@
+# TruthMatrix - SEO Configuration
+# https://www.robotstxt.org/
+
+# Allow all bots to crawl
+User-agent: *
+Allow: /
+
+# Disallow API routes from indexing
+Disallow: /api/
+
+# Disallow admin/private routes
+Disallow: /admin/
+Disallow: /.env
+Disallow: /.env.local
+Disallow: /.env.*.local
+
+# Crawl delay (in seconds)
+Crawl-delay: 1
+
+# Request rate for faster crawling
+Request-rate: 1/1s
+
+# Sitemap location
+Sitemap: https://truthmatrix.example.com/sitemap.xml
+Sitemap: https://truthmatrix.example.com/sitemap-news.xml
+
+# Google-specific rules
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Crawl-delay: 0
+
+# Bing-specific rules
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Crawl-delay: 1
+
+# Other search engines
+User-agent: Slurp
+Allow: /
+Disallow: /api/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /api/
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
