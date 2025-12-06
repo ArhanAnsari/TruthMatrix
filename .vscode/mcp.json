@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "Sentry": {
+      "url": "https://mcp.sentry.dev/mcp/arhanansari/truthmatrix",
+      "type": "http"
+    }
+  }
+}

@@ -54,6 +54,30 @@ export default function HomePage() {
               How It Works
             </a>
             <Link
+              href="/learn"
+              className="hover:text-[var(--accent-primary)] transition font-medium"
+            >
+              Learn
+            </Link>
+            <Link
+              href="/dashboard"
+              className="hover:text-[var(--accent-primary)] transition font-medium"
+            >
+              Dashboard
+            </Link>
+            <Link
+              href="/metrics"
+              className="hover:text-[var(--accent-primary)] transition font-medium"
+            >
+              Metrics
+            </Link>
+            <Link
+              href="/roadmap"
+              className="hover:text-[var(--accent-primary)] transition font-medium"
+            >
+              Roadmap
+            </Link>
+            <Link
               href="/detector"
               className="bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] px-6 py-2 rounded-lg font-bold hover:shadow-lg transition"
             >
@@ -82,6 +106,18 @@ export default function HomePage() {
             <a href="#how-it-works" className="block hover:text-[var(--accent-primary)] transition">
               How It Works
             </a>
+            <Link href="/learn" className="block hover:text-[var(--accent-primary)] transition">
+              Learn
+            </Link>
+            <Link href="/dashboard" className="block hover:text-[var(--accent-primary)] transition">
+              Dashboard
+            </Link>
+            <Link href="/metrics" className="block hover:text-[var(--accent-primary)] transition">
+              Metrics
+            </Link>
+            <Link href="/roadmap" className="block hover:text-[var(--accent-primary)] transition">
+              Roadmap
+            </Link>
             <Link
               href="/detector"
               className="block bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] px-6 py-2 rounded-lg font-bold text-center text-white"

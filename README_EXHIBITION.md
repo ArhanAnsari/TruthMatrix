@@ -474,7 +474,7 @@ MIT License - See LICENSE file
 
 - 🐛 **Bug Reports**: GitHub Issues
 - 💡 **Feature Requests**: GitHub Discussions  
-- 📧 **Email**: contact@truthmatrix.com
+- 📧 **Email**: arhanansari2009@gmail.com
 - 🌐 **Website**: https://truthmatrix.vercel.app
 
 ---

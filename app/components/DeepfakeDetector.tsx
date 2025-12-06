@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { FiUpload, FiLoader, FiX, FiCheckCircle, FiAlertTriangle, FiChevronDown } from "react-icons/fi";
+import { useState, useRef, useEffect } from "react";
+import { FiUpload, FiLoader, FiX, FiCheckCircle, FiAlertTriangle, FiChevronDown, FiShare2, FiDownload, FiPrinter, FiCopy } from "react-icons/fi";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { useAnalysisStore } from "@/app/lib/store";
+import { socialShare } from "@/app/lib/utils";
 
 interface DeepfakeAnalysis {
   authenticityScore: number;
@@ -25,6 +28,7 @@ interface DeepfakeAnalysis {
 }
 
 export default function DeepfakeDetector() {
+  const { addAnalysis } = useAnalysisStore();
   const [mediaType, setMediaType] = useState<'image' | 'video'>('image');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
@@ -36,6 +40,7 @@ export default function DeepfakeDetector() {
   const [expandedSection, setExpandedSection] = useState<string | null>("indicators");
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -150,10 +155,21 @@ export default function DeepfakeDetector() {
 
       const data = await response.json();
       setResult(data.analysis);
+
+      // Save to history
+      addAnalysis({
+        type: mediaType,
+        fileName: file.name,
+        description: description,
+        analysis: JSON.stringify(data.analysis),
+        confidence: data.analysis.confidence / 100,
+      });
+
+      toast.success("✅ Analysis complete! Saved to dashboard history.");
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "An error occurred while analyzing"
-      );
+      const errorMsg = err instanceof Error ? err.message : "An error occurred while analyzing";
+      setError(errorMsg);
+      toast.error(`❌ ${errorMsg}`);
     } finally {
       setLoading(false);
     }
@@ -330,7 +346,91 @@ export default function DeepfakeDetector() {
 
         {/* Results Section */}
         {result && (
-          <div className="space-y-4 animate-fadeIn">
+          <div ref={resultRef} className="space-y-4 animate-fadeIn">
+            {/* Share & Export Buttons */}
+            <div className="flex gap-2 flex-wrap mb-4">
+              <button
+                onClick={() => {
+                  socialShare.copyToClipboard(
+                    `Check out my ${mediaType} analysis: ${result.classification}. Authenticity score: ${result.authenticityScore}%`
+                  );
+                  toast.success("📋 Copied to clipboard!");
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 hover:bg-slate-700 border border-slate-600 text-white rounded-lg transition"
+              >
+                <FiCopy size={18} /> Copy
+              </button>
+
+              <button
+                onClick={() => {
+                  socialShare.downloadAsJSON(result, `analysis-${Date.now()}.json`);
+                  toast.success("📥 JSON downloaded!");
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 hover:bg-slate-700 border border-slate-600 text-white rounded-lg transition"
+              >
+                <FiDownload size={18} /> Export
+              </button>
+
+              <button
+                onClick={() => window.print()}
+                className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 hover:bg-slate-700 border border-slate-600 text-white rounded-lg transition"
+              >
+                <FiPrinter size={18} /> Print
+              </button>
+
+              {/* Share Menu */}
+              <div className="relative group">
+                <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition">
+                  <FiShare2 size={18} /> Share
+                </button>
+                <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-600 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition z-50">
+                  <button
+                    onClick={() => {
+                      socialShare.twitter(
+                        `Just used TruthMatrix to detect content authenticity! ${result.classification}.`,
+                        "https://truthmatrix.example.com"
+                      );
+                    }}
+                    className="block w-full text-left px-4 py-2 hover:bg-slate-700 first:rounded-t-lg"
+                  >
+                    🐦 Twitter
+                  </button>
+                  <button
+                    onClick={() => {
+                      socialShare.linkedin(
+                        "Check out TruthMatrix - AI-powered deepfake detection!",
+                        "https://truthmatrix.example.com"
+                      );
+                    }}
+                    className="block w-full text-left px-4 py-2 hover:bg-slate-700"
+                  >
+                    💼 LinkedIn
+                  </button>
+                  <button
+                    onClick={() => {
+                      socialShare.whatsapp(
+                        `Amazing deepfake detector: ${result.classification} https://truthmatrix.example.com`
+                      );
+                    }}
+                    className="block w-full text-left px-4 py-2 hover:bg-slate-700"
+                  >
+                    💬 WhatsApp
+                  </button>
+                  <button
+                    onClick={() => {
+                      socialShare.email(
+                        "TruthMatrix Analysis Result",
+                        `Classification: ${result.classification}\nAuthenticity: ${result.authenticityScore}%\nConfidence: ${result.confidence}%`
+                      );
+                    }}
+                    className="block w-full text-left px-4 py-2 hover:bg-slate-700 last:rounded-b-lg"
+                  >
+                    📧 Email
+                  </button>
+                </div>
+              </div>
+            </div>
+
             {/* Authenticity Score */}
             <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/30 p-6 rounded-xl">
               <h3 className="text-lg font-semibold text-slate-200 mb-4">
